@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "imgName": "Img1",
+      "title": "Experienced and Reliable",
+      "description": "We’re not an agency, but a young startup run by a passionate group of professionals."
+    },
+    {
+      "id": 2,
+      "imgName": "Img2",
+      "title": "Transparent Pricing",
+      "description": "You get what you pay for. Additionally, you get replacement guarantee, Covid-19 test reports, verification documents and more!"
+    },
+    {
+      "id": 3,
+      "imgName": "Img3",
+      "title": "Customer Support",
+      "description": "Our executives will always be there to hear you out and solve your issues"
+    }
+  ]
+  
