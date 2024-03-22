@@ -38,7 +38,7 @@ function Profile() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/userDetails', { withCredentials: true });
+      const response = await axios.get('https://helperhubserver.onrender.com/api/v1/userDetails', { withCredentials: true });
       const { username, email, mobileNumber, dob, gender } = response.data.user;
       setBasicInfo({ username, email, mobileNumber, dob, gender });
     } catch (error) {
@@ -76,7 +76,7 @@ function Profile() {
     event.preventDefault();
     try {
       const response = await axios.put(
-        'http://localhost:4000/api/v1/me/update',
+        'https://helperhubserver.onrender.com/api/v1/me/update',
         {
           username: basicInfo.username,
           email: basicInfo.email,
@@ -98,7 +98,7 @@ function Profile() {
     event.preventDefault();
     try {
       const response = await axios.put(
-        'http://localhost:4000/api/v1/password/update',
+        'https://helperhubserver.onrender.com/api/v1/password/update',
         {
           oldPassword: password.oldPassword,
           newPassword: password.newPassword,

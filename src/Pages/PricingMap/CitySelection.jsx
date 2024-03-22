@@ -17,7 +17,7 @@ const CitySelection = () => {
  },[])
  const fetchAllLocations=async()=>{
   try {
-    const {data:{allLocations}}=await axios.get("http://localhost:4000/api/v1/location");
+    const {data:{allLocations}}=await axios.get("https://helperhubserver.onrender.com/api/v1/location");
     setCities(allLocations);
   } catch (error) {
     console.log(error.response);

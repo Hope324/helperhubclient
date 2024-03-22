@@ -24,7 +24,7 @@ const ContactUs = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const {data} = await axios.post('http://localhost:4000/api/v1/contact',{message},{withCredentials:true});
+      const {data} = await axios.post('https://helperhubserver.onrender.com/api/v1/contact',{message},{withCredentials:true});
       toast.success(data.message)
       setMessage('');
       setUnseenMessage(unseenMessage+1);

@@ -24,7 +24,7 @@ const UserDetails = () => {
 
   const fetchUserDetails = async (userId) => {
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/v1/admin/user/${userId}`, { withCredentials: true });
+      const { data } = await axios.get(`https://helperhubserver.onrender.com/api/v1/admin/user/${userId}`, { withCredentials: true });
       setUser(data.user);
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -36,7 +36,7 @@ const UserDetails = () => {
   const handleMessageDisplay = async () => {
     setShowMessage(!showMessage);
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/v1/contact/${userId}`, { withCredentials: true });
+      const { data } = await axios.get(`https://helperhubserver.onrender.com/api/v1/contact/${userId}`, { withCredentials: true });
       if (!data.allMessages) {
         toast.success(data.message);
       }

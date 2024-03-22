@@ -21,7 +21,7 @@ const AdditionalInfo = () => {
   
   const fetchTitlesFromDatabase = async () => {
     try {
-      const { data } = await axios.get('http://localhost:4000/api/v1/allServices');
+      const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/allServices');
       setFetchTitles(data.allServices);
     } catch (error) {
       console.error('Error fetching titles:', error.message);
@@ -53,7 +53,7 @@ const AdditionalInfo = () => {
 
   const addAdditionalDetails = async () => {
     try {
-         await axios.post('http://localhost:4000/api/v1/admin/additionalDetails', {
+         await axios.post('https://helperhubserver.onrender.com/api/v1/admin/additionalDetails', {
         title,
         subsections
       },
@@ -70,7 +70,7 @@ const AdditionalInfo = () => {
 
   const fetchAllAdditionalDetails = async () => {
     try {
-      const { data } = await axios.get('http://localhost:4000/api/v1/additionalDetails');
+      const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/additionalDetails');
       setGetAllAdditionalDetails(data.allAdditionalInfo);
     } catch (error) {
       console.log(error)

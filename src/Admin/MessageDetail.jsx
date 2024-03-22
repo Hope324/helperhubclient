@@ -34,7 +34,7 @@ const MessageDetail = () => {
 
   const fetchMessage = useCallback(async () => {
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/v1/contact/user/${userId}/message/${messageId}`, { withCredentials: true });
+      const { data } = await axios.get(`https://helperhubserver.onrender.com/api/v1/contact/user/${userId}/message/${messageId}`, { withCredentials: true });
       setMessage(data.message);
       if(data.message.ticket.status==="Resolved"){
         setIsResolved(true)
@@ -52,7 +52,7 @@ const MessageDetail = () => {
   const updateMessageStatus = useCallback(async () => {
     try {
       await axios.put(
-        `http://localhost:4000/api/v1/contact/user/${userId}/message/${messageId}`,
+        `https://helperhubserver.onrender.com/api/v1/contact/user/${userId}/message/${messageId}`,
         { status: isResolved ? 'Resolved' : 'Pending', adminName: isResolved ? name : 'None' },
         { withCredentials: true }
       );

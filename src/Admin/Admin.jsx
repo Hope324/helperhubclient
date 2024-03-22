@@ -18,7 +18,7 @@ const AdminDashboard = () => {
 
   const fetchAllUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/admin/users', { withCredentials: true });
+      const response = await axios.get('https://helperhubserver.onrender.com/api/v1/admin/users', { withCredentials: true });
       setUsers(response.data.users);
     } catch (error) {
       console.error(error);
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
 
   const handleDeleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/v1/admin/user/${id}`, { withCredentials: true });
+      await axios.delete(`https://helperhubserver.onrender.com/api/v1/admin/user/${id}`, { withCredentials: true });
       fetchAllUsers();
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
 
   const handleUpdateRole = async (role) => {
     try {
-      await axios.put(`http://localhost:4000/api/v1/admin/user/${selectedUser._id}`, { role }, { withCredentials: true });
+      await axios.put(`https://helperhubserver.onrender.com/api/v1/admin/user/${selectedUser._id}`, { role }, { withCredentials: true });
       fetchAllUsers();
       handleCloseModal();
     } catch (error) {

@@ -76,7 +76,7 @@ const ServicesPage = () => {
   },[])
   const fetchAllServices=async()=>{
     try {
-      const {data:{allServices}}=await axios.get("http://localhost:4000/api/v1/allServices");
+      const {data:{allServices}}=await axios.get("https://helperhubserver.onrender.com/api/v1/allServices");
       setServicesData(allServices)
     } catch (error) {
       console.log(error)

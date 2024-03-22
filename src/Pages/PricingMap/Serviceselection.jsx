@@ -33,7 +33,7 @@ const ServiceSelection = () => {
 
   const fetchServiceByTitle = useCallback(async () => {
     try {
-      const {data} = await axios.post("http://localhost:4000/api/v1/selectService/title",{title:Title});
+      const {data} = await axios.post("https://helperhubserver.onrender.com/api/v1/selectService/title",{title:Title});
       setGetDetails(data.particularServiceDetail);
     } catch (error) {
       console.log(error);

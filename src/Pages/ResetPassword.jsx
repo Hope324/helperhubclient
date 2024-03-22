@@ -20,7 +20,7 @@ const ResetPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.put(`http://localhost:4000/api/v1/password/reset/${token}`,
+      const { data } = await axios.put(`https://helperhubserver.onrender.com/api/v1/password/reset/${token}`,
       {
         newPassword,
         confirmPassword

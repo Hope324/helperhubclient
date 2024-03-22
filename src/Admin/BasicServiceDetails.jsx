@@ -24,7 +24,7 @@ const BasicServiceDetails = () => {
   };
   const handleAddAddon = async () => {
     try {
-      const {data} = await axios.post(`http://localhost:4000/api/v1/admin/selectService/${id}`, addonFormData,{withCredentials:true});
+      const {data} = await axios.post(`https://helperhubserver.onrender.com/api/v1/admin/selectService/${id}`, addonFormData,{withCredentials:true});
       const { message } =data;
       toast.success(message);
       fetchChoosenService();
@@ -50,7 +50,7 @@ console.log(title)
   }
   const handleDeleteAddon = async (addonId) => {
     try {
-      const {data}=await axios.delete(`http://localhost:4000/api/v1/admin/selectService/${id}/addOn/${addonId}`,{withCredentials:true});
+      const {data}=await axios.delete(`https://helperhubserver.onrender.com/api/v1/admin/selectService/${id}/addOn/${addonId}`,{withCredentials:true});
       
       toast.success(data.message)
       fetchChoosenService();
@@ -61,7 +61,7 @@ console.log(title)
   };
   const handleSaveEdit=async()=>{
     try {
-      const {data}=await axios.put(`http://localhost:4000/api/v1/admin/selectService/${id}/addOn/${editAddOn._id}`,editAddOn,{withCredentials:true})
+      const {data}=await axios.put(`https://helperhubserver.onrender.com/api/v1/admin/selectService/${id}/addOn/${editAddOn._id}`,editAddOn,{withCredentials:true})
       toast.success(data.message);
       fetchChoosenService();
     } catch (error) {
@@ -74,7 +74,7 @@ console.log(title)
  
   const fetchChoosenService = useCallback(async () => {
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/v1/admin/selectService/${id}`, { withCredentials: true });
+      const { data } = await axios.get(`https://helperhubserver.onrender.com/api/v1/admin/selectService/${id}`, { withCredentials: true });
       setChoosenServiceData(data.choosedService?.servicesInfo?.addonsData);
     } catch (error) {
       console.log(error);

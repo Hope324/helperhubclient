@@ -55,7 +55,7 @@ function App() {
   const {setUser,setIsAuthenticated,setLoading,isAuthenticated,user,setUserRole}=useContext(Context)
   useEffect(()=>{
     setLoading(true);
-    axios.get('http://localhost:4000/api/v1/userDetails',{withCredentials:true}).then(res=>{
+    axios.get('https://helperhubserver.onrender.com/api/v1/userDetails',{withCredentials:true}).then(res=>{
       setUser(res.data.user);
       console.log(res.data.user)
       setIsAuthenticated(true);

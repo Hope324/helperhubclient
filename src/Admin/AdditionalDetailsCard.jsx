@@ -34,7 +34,7 @@ const AdditionalDetailsCard = ({ details,fetchAllAdditionalDetails,enteredTitle}
   const handleSaveEdit = async () => {
     try {
       const {data} = await axios.put(
-        `http://localhost:4000/api/v1/admin/additionalDetails/${details._id}/subsection/${editSubsection._id}`,
+        `https://helperhubserver.onrender.com/api/v1/admin/additionalDetails/${details._id}/subsection/${editSubsection._id}`,
         {
           heading: editSubsection.heading,
           subHeading: editSubsection.subHeading,
@@ -54,7 +54,7 @@ const AdditionalDetailsCard = ({ details,fetchAllAdditionalDetails,enteredTitle}
 
   const deleteSubsection = async (subsectionId) => {
     try {
-      const { data } = await axios.delete(`http://localhost:4000/api/v1/admin/additionalDetails/${details._id}/subsection/${subsectionId}`,
+      const { data } = await axios.delete(`https://helperhubserver.onrender.com/api/v1/admin/additionalDetails/${details._id}/subsection/${subsectionId}`,
       {withCredentials:true});
       toast.success(data.message);
       fetchAllAdditionalDetails();

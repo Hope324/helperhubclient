@@ -14,7 +14,7 @@ function ServicesDescription() {
   const dispatch=useDispatch();
   const fetchParticularServiceInfo=useCallback(async()=>{
     try {
-      const {data}=await axios.post("http://localhost:4000/api/v1/service/title",{title});
+      const {data}=await axios.post("https://helperhubserver.onrender.com/api/v1/service/title",{title});
       console.log(data)
       setHelperData(data.service)
     } catch (error) {

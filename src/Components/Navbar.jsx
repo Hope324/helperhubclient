@@ -36,7 +36,7 @@ function Navbar() {
   const handleLogout = async() => {
     setLoading(true);
     try {
-      const { data } = await axios.get('http://localhost:4000/api/v1/logout',{withCredentials:true});
+      const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/logout',{withCredentials:true});
       console.log(data.message);
       setIsAuthenticated(false);
       setLoading(false);
@@ -56,7 +56,7 @@ function Navbar() {
   }
   const fetchTitlesFromDatabase=async()=>{
     try {
-      const {data}=await axios.get('http://localhost:4000/api/v1/allServices');
+      const {data}=await axios.get('https://helperhubserver.onrender.com/api/v1/allServices');
       setTitles(data.allServices); 
     } catch (error) {
       console.log(error);

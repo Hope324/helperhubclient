@@ -49,7 +49,7 @@ const RegistrationForm = () => {
       e.preventDefault();
   
       try {
-        const { data } = await axios.post('http://localhost:4000/api/v1/register', form,
+        const { data } = await axios.post('https://helperhubserver.onrender.com/api/v1/register', form,
         {
           headers: {
             "Content-Type": "application/json",

@@ -24,7 +24,7 @@ const SummaryPage = () => {
         return;
       }
       setLoading(true);
-      const {data}=await axios.post("http://localhost:4000/api/v1/user/purchase/order",
+      const {data}=await axios.post("https://helperhubserver.onrender.com/api/v1/user/purchase/order",
         {
           Title:summary.Title,
           Location:summary.Location,

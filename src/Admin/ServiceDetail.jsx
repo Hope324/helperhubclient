@@ -16,7 +16,7 @@ const ServiceDetail = () => {
   const [loading,setLoading]=useState(true);
   const submitBasicService=async()=>{
     try {
-      const {data}=await axios.post('http://localhost:4000/api/v1/admin/selectService',{
+      const {data}=await axios.post('https://helperhubserver.onrender.com/api/v1/admin/selectService',{
         title: title,
         servicesInfo:{
           serviceData:formData
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
   }
   const fetchTitlesFromDatabase=async()=>{
     try {
-      const { data } = await axios.get('http://localhost:4000/api/v1/allServices');
+      const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/allServices');
       setFetchTitles(data.allServices);
     } catch (error) {
       console.error('Error fetching titles:', error.message);
@@ -54,7 +54,7 @@ const ServiceDetail = () => {
   }
   const fetchAllBasicServices=async()=>{
     try {
-      const {data}=await axios.get('http://localhost:4000/api/v1/selectService');
+      const {data}=await axios.get('https://helperhubserver.onrender.com/api/v1/selectService');
       setAllBasicServices(data.showAllServices);
     } catch (error) {
       console.log(error);
@@ -64,7 +64,7 @@ const ServiceDetail = () => {
   }
   const deleteHandler=async(id)=>{
     try {
-        const {data}=await axios.delete(`http://localhost:4000/api/v1/admin/selectService/${id}`,{withCredentials:true});
+        const {data}=await axios.delete(`https://helperhubserver.onrender.com/api/v1/admin/selectService/${id}`,{withCredentials:true});
         toast.success(data.message);
         fetchAllBasicServices()
       }

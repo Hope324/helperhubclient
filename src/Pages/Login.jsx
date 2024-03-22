@@ -34,7 +34,7 @@ const SignInForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:4000/api/v1/login', form,
+      const { data } = await axios.post('https://helperhubserver.onrender.com/api/v1/login', form,
       {
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const SignInForm = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/v1/password/forgot', { email: form.email });
+      await axios.post('https://helperhubserver.onrender.com/api/v1/password/forgot', { email: form.email });
       toast.success("The link to reset your password has been sent to your email. Please check your inbox.");
     } catch (error) {
       console.error(error);

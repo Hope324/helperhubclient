@@ -23,7 +23,7 @@ const Home = () => {
   
   const fetchTitlesFromDatabase=async()=>{
     try {
-      const { data } = await axios.get('http://localhost:4000/api/v1/allServices');
+      const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/allServices');
       setFetchTitles(data.allServices);
     } catch (error) {
       console.error('Error fetching titles:', error.message);

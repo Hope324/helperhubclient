@@ -18,7 +18,7 @@ const DetailsRegardingBooking = () => {
   const navigate = useNavigate();
   const fetchAdditionalDetails = useCallback(async () => {
     try {
-      const { data } = await axios.post("http://localhost:4000/api/v1/additionalDetail/title", { title: Title });
+      const { data } = await axios.post("https://helperhubserver.onrender.com/api/v1/additionalDetail/title", { title: Title });
       setGetExtraDetails(data.particularAdditionalInfo);
     } catch (error) {
       console.log(error);

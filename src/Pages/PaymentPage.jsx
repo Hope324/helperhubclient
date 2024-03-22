@@ -18,7 +18,7 @@ const PaymentPage = () => {
   console.log(orderId);
   const saveUserPurchaseDetails=useCallback(async()=>{
     try {
-      const {data}=await axios.put(`http://localhost:4000/api/v1/user/purchase/order/${orderId}`,{},{withCredentials:true})
+      const {data}=await axios.put(`https://helperhubserver.onrender.com/api/v1/user/purchase/order/${orderId}`,{},{withCredentials:true})
       console.log(data)
       toast.success(data.message);
     } catch (error) {
