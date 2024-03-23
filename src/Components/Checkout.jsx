@@ -27,7 +27,6 @@ const checkoutHandler=async(amount)=>{
     };
     const razor = new window.Razorpay(options);
     razor.open();
-    console.log(options)
    }
     catch (error) {
       console.log(error)

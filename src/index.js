@@ -11,7 +11,7 @@ const AppWrapper=()=>{
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
   const [userRole, setUserRole] = useState("PUBLIC");
-  const [orderId,setOrderId]=useState('');
+  const [orderId,setOrderId]=useState(null);
   const [unseenMessage,setUnseenMessage]=useState(0);
 
 

@@ -133,7 +133,7 @@ const AllServices = () => {
           Services List
         </Typography>
         <Grid container spacing={2}>
-          {services.map((service) => (
+          {services && services.map((service) => (
             <Grid item key={service._id} xs={12} sm={6} md={4} lg={3}>
               <Card sx={{ display: 'flex', flexDirection: 'column',height:'500px' }}>
                 <CardMedia 

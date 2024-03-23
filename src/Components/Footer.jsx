@@ -18,16 +18,16 @@ const Footer = () => {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-end', // Align items at the center
+          alignItems: 'flex-end', 
           flexWrap: 'wrap',
           gap: '4rem', 
            
           padding: '0 20px',
         }}
       >
-        {/* Left Section */}
+  
         <Box sx={{ flex: '1 1 250px',textAlign:'justify' }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" fontFamily="Poppins" gutterBottom>
             Follow Us On
           </Typography>
           <IconButton color="inherit" component={Link} href="#">
@@ -36,19 +36,19 @@ const Footer = () => {
           <IconButton color="inherit" component={Link} href="#">
             <TwitterIcon />
           </IconButton>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom fontFamily="Poppins">
             HelperHub
           </Typography>
-          <Typography variant="body2">
+          <Typography variant="body2" fontFamily="Poppins">
             HelperHub is your dedicated partner in creating a nurturing home environment. Explore our range of
             services designed to make your life easier and more enjoyable. Whether you're seeking reliable caregivers,
             professional nursing assistance, or efficient housekeeping, we're here to cater to your unique needs.
           </Typography>
         </Box>
 
-        {/* Middle Section */}
+
         <Box sx={{ flex: '1 1 250px', textAlign: 'center'}}>
-          <Typography variant="body2" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <Typography variant="body2" fontFamily="Poppins" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <Link href="/home" color="inherit">
               Home
             </Link>
@@ -64,15 +64,15 @@ const Footer = () => {
           </Typography>
         </Box>
 
-        {/* Right Section */}
+    
         <Box sx={{ flex: '1 1 250px', textAlign: 'justify' }}>
           <Typography variant="body2">
-            <Typography>HelperHub—Your Partner in Home Wellness</Typography>
-            <Typography style={{ margin: '0.4rem 0' }}>
+            <Typography fontFamily="Poppins">HelperHub—Your Partner in Home Wellness</Typography>
+            <Typography fontFamily="Poppins" style={{ margin: '0.4rem 0' }}>
               Elevate your living experience with our trusted and compassionate services. At HelperHub, we're not
               just caregivers; we're family.
             </Typography>
-            <Typography>© 2024 HelperHub. All rights reserved</Typography>
+            <Typography fontFamily="Poppins">© 2024 HelperHub. All rights reserved</Typography>
           </Typography>
         </Box>
       </Box>

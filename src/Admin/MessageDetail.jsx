@@ -86,7 +86,7 @@ const MessageDetail = () => {
               name="ticket"
             />
           }
-          label={!isResolved ? "Ticket is pending" : "Ticket resolved"}
+         label={`Ticket-${ticketStatus}`}
         />
       </Paper>
     </Container>

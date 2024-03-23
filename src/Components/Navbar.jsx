@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Context } from "../index";
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 function Navbar() {
   const { isAuthenticated, setIsAuthenticated, loading, setLoading, user, setUser,setUserRole} = useContext(Context);
@@ -37,7 +38,7 @@ function Navbar() {
     setLoading(true);
     try {
       const { data } = await axios.get('https://helperhubserver.onrender.com/api/v1/logout',{withCredentials:true});
-      console.log(data.message);
+      toast.success(data.message);
       setIsAuthenticated(false);
       setLoading(false);
       setUser({});
@@ -70,7 +71,7 @@ useEffect(()=>{
     <>
       <AppBar position="sticky" sx={{ top: 0, backgroundColor: "black", zIndex: 1201 }}>
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Typography variant="h6" style={{ flexGrow: 1,fontWeight:'Poppins' }}>
             HelperHub
           </Typography>
           <Hidden mdUp implementation="css">
@@ -81,23 +82,23 @@ useEffect(()=>{
           <Hidden smDown implementation="css">
             { 
               (isAuthenticated && user && user.role ==='admin')?
-              (<Button color="inherit" onClick={() => history("/Admin")}>
+              (<Button color="inherit" fontWeight="Poppins" onClick={() => history("/Admin")}>
               Admin
             </Button>):
             (
               null
             )
             }
-            <Button color="inherit" onClick={() => history("/Home")}>
+            <Button color="inherit" fontWeight="Poppins" onClick={() => history("/Home")}>
               Home
             </Button>
-            <Button color="inherit" onClick={handleServicesMenuOpen}>
+            <Button color="inherit" fontWeight="Poppins" onClick={handleServicesMenuOpen}>
               Services
             </Button>
-            <Button color="inherit" onClick={() => history("/About")}>
+            <Button color="inherit" fontWeight="Poppins" onClick={() => history("/About")}>
               About Us
             </Button>
-            <Button color="inherit" onClick={() => history("/Contact")}>
+            <Button color="inherit" fontWeight="Poppins" onClick={() => history("/Contact")}>
               Contact Us
             </Button>
             {isAuthenticated ? (
@@ -137,7 +138,7 @@ useEffect(()=>{
         {
           titles && titles.length !==0
           && titles.map((item)=>(
-            <MenuItem key={item._id} onClick={() => navigateTo(`/Service/${item.title}`)}>
+            <MenuItem key={item._id} fontWeight="Poppins" onClick={() => navigateTo(`/Service/${item.title}`)}>
                   {item.title}
              </MenuItem>
           ))

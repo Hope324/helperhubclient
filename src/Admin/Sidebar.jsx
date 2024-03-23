@@ -52,7 +52,7 @@ const Sidebar = () => {
         open={isOpen}
         anchor="left"
         onClose={handleDrawerClose}
-        style={{ display: isOpen ? 'block' : 'none', width: drawerWidth }}
+        style={{ display: isOpen ? 'block' : 'none', width: drawerWidth,fontFamily:"Poppins" }}
       >
         <div style={{ width: drawerWidth }}>
           <Button onClick={handleDrawerClose}>&times; Close</Button>

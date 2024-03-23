@@ -15,7 +15,6 @@ function ServicesDescription() {
   const fetchParticularServiceInfo=useCallback(async()=>{
     try {
       const {data}=await axios.post("https://helperhubserver.onrender.com/api/v1/service/title",{title});
-      console.log(data)
       setHelperData(data.service)
     } catch (error) {
       console.log(error)
@@ -49,8 +48,8 @@ function ServicesDescription() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="100%" textAlign="center">
-            <Typography variant="h4" style={{ fontWeight: 'bold' }}>{helperData?.heading}</Typography>
-            <Typography variant="h6">{helperData.description}</Typography>
+            <Typography variant="h4" style={{fontFamily:'Roboto', fontWeight: 'bold' }}>{helperData?.heading}</Typography>
+            <Typography variant="h6" style={{fontFamily:'Roboto'}}>{helperData.description}</Typography>
             <Button
               variant="contained"
               sx={{ color: 'white', backgroundColor: 'black', width: '10rem', mt: '1rem' }}

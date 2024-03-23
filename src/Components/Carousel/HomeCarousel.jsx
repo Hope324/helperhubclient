@@ -13,7 +13,6 @@ const HomeCarousel = () => {
     try {
       const {data}=await axios.get('/HomeCoverPage/CarouselData.json');
       setCarouselData(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
       

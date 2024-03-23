@@ -63,7 +63,6 @@ const ServiceSelection = () => {
       setBasicPayAdded(false);
       const updatedBasePay = { ...basicServicePay };
       delete updatedBasePay[mainHeading];
-      console.log(updatedBasePay);
       setBasicServicePay(updatedBasePay);
       setAddOns({});
       dispatch({ type: 'removeBasicPay', payload: mainHeading });
@@ -76,13 +75,11 @@ const ServiceSelection = () => {
        }
       setBasicServicePay((prevBasicPay) => {
         const updatedBasicPay = { ...prevBasicPay, [mainHeading]: Number(price) };
-        console.log(updatedBasicPay);
         dispatch({ type: "basicPay", payload: updatedBasicPay });
         return updatedBasicPay;
       });
       setTotalPrice((prev) => {
         const updatedPrice = prev + Number(price);
-        console.log(updatedPrice);
         return updatedPrice;
       });
     }
@@ -95,21 +92,17 @@ const ServiceSelection = () => {
     if (addOns[heading]) {
       const updatedAddOns = { ...addOns };
       delete updatedAddOns[heading];
-      console.log(updatedAddOns);
       setAddOns(updatedAddOns);
       setTotalPrice((prevPrice) => {
-        console.log(prevPrice - Number(extraCharge));
         return prevPrice - Number(extraCharge);
       });
     } else {
       setTotalPrice((prev) => {
         const updatedPrice = prev + Number(extraCharge);
-        console.log(updatedPrice);
         return updatedPrice;
       });
       setAddOns((prevAddOn) => {
         const updatedAddOns = { ...prevAddOn, [heading]: Number(extraCharge) };
-        console.log(updatedAddOns);
         return updatedAddOns;
       });
     }
@@ -124,12 +117,12 @@ const ServiceSelection = () => {
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom style={{fontFamily:'Roboto'}}>
         Select Service
       </Typography>
 
       <FormControl component="fieldset" sx={{ marginBottom: 2 }}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom style={{fontFamily:'Roboto'}}>
           Gender
         </Typography>
         <RadioGroup
@@ -160,7 +153,7 @@ const ServiceSelection = () => {
         </RadioGroup>
       </FormControl>
 
-      <Typography variant="h5" marginTop={1}>
+      <Typography variant="h3" marginTop={1} fontFamily={'Roboto'}>
         {Title}
       </Typography>
 
@@ -197,11 +190,11 @@ const ServiceSelection = () => {
               alignItems: "flex-start",
             }}
           >
-            <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            <Typography variant="h5" sx={{ fontWeight: "bold",fontFamily:'Roboto'}}>
               {getDetails?.servicesInfo?.serviceData?.header}
             </Typography>
             <Typography variant="h6">
-              Price: Rs{getDetails?.servicesInfo?.serviceData?.price}
+              Price: ₹{getDetails?.servicesInfo?.serviceData?.price}
             </Typography>
             <Typography variant="body2" color="textSecondary">
               {getDetails?.servicesInfo?.serviceData?.description}
@@ -238,7 +231,7 @@ const ServiceSelection = () => {
         </CardContent>
       </Card>
 
-      {getDetails?.servicesInfo?.addonsData && getDetails?.servicesInfo?.addonsData.length !==0  && (<Typography variant="h5" marginTop={2} fontWeight={"bold"}>
+      {getDetails?.servicesInfo?.addonsData && getDetails?.servicesInfo?.addonsData.length !==0  && (<Typography variant="h5" marginTop={2} fontWeight={"bold"} fontFamily={'Roboto'}>
         Add-Ons
       </Typography>)}
       {getDetails?.servicesInfo?.addonsData && getDetails?.servicesInfo?.addonsData?.length !==0 &&
@@ -282,7 +275,7 @@ const ServiceSelection = () => {
               <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                 {addon.header}
               </Typography>
-              <Typography variant="h6">Price: Rs{addon.price}</Typography>
+              <Typography variant="h6">Price: ₹{addon.price}</Typography>
               <Typography variant="body2" color="textSecondary">
                 {addon.description}
               </Typography>

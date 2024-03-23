@@ -1,6 +1,7 @@
 
-import React, { useContext, useEffect, useState } from 'react';
-import { TextField, Button, Grid, Box, Container as MuiContainer } from '@mui/material';
+
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { TextField, Button, Grid, Box, Container as MuiContainer, Card, CardContent, Typography, Divider } from '@mui/material';
 import { Context } from '../index';
 import Loader from '../Components/Loader';
 import { Link } from 'react-router-dom';
@@ -10,11 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearPaymentInfo, setPaymentInfo } from '../Redux/paymentReducer';
 import { Stack } from '@mui/system';
 
+
 function Profile() {
-  const { isAuthenticated, loading } = useContext(Context);
+  const { isAuthenticated, loading, user } = useContext(Context);
   const dispatch = useDispatch();
   const { cardName, cardNumber, expiryDate, cvv } = useSelector((state) => state.paymentReducer);
-
+  const [newOrder, setNewOrder] = useState('');
+  const [oId, setOId] = useState('');
+  const [ordersList,setOrdersList]=useState([]);
+  const [userId,setUserId]=useState('');
   const [basicInfo, setBasicInfo] = useState({
     username: '',
     email: '',
@@ -46,11 +51,50 @@ function Profile() {
     }
   };
 
+  const getNewOrderDetails = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`https://helperhubserver.onrender.com/api/v1/user/${user._id}/purchase/order/${oId}`, { withCredentials: true });
+      setNewOrder(data.order);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [oId, user._id]);
+ 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN');
+  };
+
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-IN');
+  };
+  const fetchAllOrdersList=useCallback(async()=>{
+    try {
+      const {data}=await axios.get(`https://helperhubserver.onrender.com/api/v1/purchases/user/${userId}/allOrders`,{withCredentials:true});
+      setOrdersList(data.purchases);
+    } catch (error) {
+      console.log(error);
+    }
+  },[userId])
   useEffect(() => {
     setPaymentInfoLocal({ cardName, cardNumber, expiryDate, cvv });
     fetchUserDetails();
-  }, [cardName, cardNumber, expiryDate, cvv]);
-
+    const getIdFromLocalStorage = JSON.parse(localStorage.getItem('orderId'))
+    if (getIdFromLocalStorage) {
+      setOId(getIdFromLocalStorage)
+    }
+    if (oId) {
+      getNewOrderDetails();
+    }
+    
+  }, [cardName, cardNumber, expiryDate, cvv, oId, getNewOrderDetails]);
+  useEffect(()=>{
+    setUserId(user._id);
+    if(userId){
+    fetchAllOrdersList()
+    }
+  },[user._id,userId,fetchAllOrdersList])
   const handleBasicInfoChange = (event) => {
     setBasicInfo({
       ...basicInfo,
@@ -86,7 +130,6 @@ function Profile() {
         },
         { withCredentials: true }
       );
-      console.log('User Details Updated:', response.data);
       toast.success(response.data.message);
     } catch (error) {
       console.error('Error updating user details:', error);
@@ -97,7 +140,7 @@ function Profile() {
   const handlePasswordUpdation = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.put(
+      await axios.put(
         'https://helperhubserver.onrender.com/api/v1/password/update',
         {
           oldPassword: password.oldPassword,
@@ -106,10 +149,8 @@ function Profile() {
         },
         { withCredentials: true }
       );
-      console.log('Password Updated:', response.data);
       toast.success('Password updated successfully...');
     } catch (error) {
-      console.error('Error updating password:', error);
       toast.error('Something went wrong! Try again');
     } finally {
       setPassword({ oldPassword: '', newPassword: '', confirmPassword: '' });
@@ -125,10 +166,11 @@ function Profile() {
   const clearData = () => {
     dispatch(clearPaymentInfo());
   };
-
+ 
   return (
     loading ? <Loader /> : (
       <MuiContainer maxWidth="lg">
+        
         {!isAuthenticated ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
             <h1 style={{ width: '100%', textAlign: 'center' }}>Login first to access this page</h1>
@@ -137,9 +179,10 @@ function Profile() {
             </Link>
           </div>
         ) : (
+          
           <Stack>
-            <Box  sx={{ display: 'flex' ,justifyContent:'space-between'}}>
-              <form onSubmit={handleUpdation} style={{ padding: '0 16px', marginBottom: '20px' }}>
+            <Box  sx={{ display: 'flex', justifyContent:'space-between'}}>
+              <form onSubmit={handleUpdation} style={{ padding: '0 16px', marginBottom: '20px', flex: '1' }}>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} mt={2}>
                     <Box fontWeight="bold" fontSize={20} textAlign="center" sx={{mb:3}}>Basic Information:</Box>
@@ -199,7 +242,7 @@ function Profile() {
                   </Grid>
                 </Grid>
               </form>
-              <form onSubmit={handlePasswordUpdation} style={{ padding: '0 16px', marginBottom: '20px' }}>
+              <form onSubmit={handlePasswordUpdation} style={{ padding: '0 16px', marginBottom: '20px', flex: '1' }}>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item xs={12} sm={10} mt={2}>
                     <Box fontWeight="bold" fontSize={20} textAlign="center" sx={{mb:3}}>Change Password:</Box>
@@ -242,7 +285,7 @@ function Profile() {
                 </Grid>
               </form>
             </Box>
-            <form onSubmit={handlePaymentInfoUpdation} style={{ padding: '0 16px' }}>
+            <form onSubmit={handlePaymentInfoUpdation} style={{ padding: '0 16px', flex: '1' }}>
               <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12} sm={6}>
                   <Box fontWeight="bold" fontSize={20} textAlign="center">
@@ -298,7 +341,107 @@ function Profile() {
                 </Button>
               </Box>
             </form>
-          </Stack>
+          <Divider/>
+            <Box sx={{ width: '100%', textAlign: 'center', marginTop:'4rem' }}>
+  <Typography component="h1" variant="h3" fontWeight="bold" sx={{ marginBottom: 2 }}>
+    Latest order-
+  </Typography>
+</Box>
+<Grid container spacing={2} justifyContent="center">
+  <Grid item md={12}>
+    {newOrder && (
+      <Card sx={{ display: 'flex', flexDirection: 'column', height: 'auto', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" textAlign={'center'}><strong>Service:</strong> {newOrder.Title}</Typography>
+              <Typography variant="h6" textAlign={'center'}><strong>Location:</strong> {newOrder.Location}</Typography>
+              <Typography variant="h6" textAlign={'center'}><strong>Gender:</strong> {newOrder.Gender}</Typography>
+            </Grid>
+            
+            <Grid item xs={12} md={6}>
+              {(newOrder.BasicPay && Object.keys(newOrder.BasicPay).length !== 0) && (
+                <>
+                  <Typography variant="h6" textAlign={'center'}><strong>Basic Pay-</strong></Typography>
+                  {Object.keys(newOrder.BasicPay).map((key) => (
+                    <Stack key={key} direction="row" justifyContent="center" alignItems="center" mt={1}>
+                      <Typography variant="body1"><strong>{key}: </strong></Typography>
+                      <Typography variant="body1">₹{newOrder.BasicPay[key]}/-</Typography>
+                    </Stack>
+                  ))}
+                </>
+              )}
+              {(newOrder.AddOns && Object.keys(newOrder.AddOns).length !== 0) && (
+                <>
+                  <Typography variant="h6" textAlign={'center'} mt={2}><strong>Add Ons-</strong></Typography>
+                  {Object.keys(newOrder.AddOns).map((key) => (
+                    <Stack key={key} direction="row" justifyContent="center" alignItems="center" mt={1}>
+                      <Typography variant="body1"><strong>{key}: </strong></Typography>
+                      <Typography variant="body1">₹{newOrder.AddOns[key]}/-</Typography>
+                    </Stack>
+                  ))}
+                </>
+              )}
+            </Grid>
+          </Grid>
+          <Typography variant="h6" textAlign={'center'} mt={2}><strong>Total Price: </strong> ₹{newOrder.TotalPrice}</Typography>
+          <Typography variant="h6" textAlign={'end'} mt={2}>{formatTime(newOrder.createdAt)}, {formatDate(newOrder.createdAt)}</Typography>
+        </CardContent>
+      </Card>
+    )}
+  </Grid>
+</Grid>
+<Divider style={{height:'3rem'}}/>
+          <Grid container spacing={2} justifyContent="center" mt={5} >
+  <Grid item md={12}>
+    <Typography variant='h3' textAlign={'center'}><strong>Total orders- </strong> {ordersList.length}</Typography>
+    {ordersList.map((order) => (
+      <Grid key={order._id} item>
+        <Card sx={{ display: 'flex', flexDirection: 'column',marginTop:'2rem' ,height: 'auto', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', borderRadius: '10px' }}>
+          <CardContent>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h6" textAlign={'center'}><strong>Service:</strong> {order.Title}</Typography>
+                <Typography variant="h6" textAlign={'center'}><strong>Location:</strong> {order.Location}</Typography>
+                <Typography variant="h6" textAlign={'center'}><strong>Gender:</strong> {order.Gender}</Typography>
+              </Grid>
+              
+              <Grid item xs={12} md={6}>
+                {(order.BasicPay && Object.keys(order.BasicPay).length !== 0) && (
+                  <>
+                    <Typography variant="h6" textAlign={'center'}><strong>Basic Pay-</strong></Typography>
+                    {Object.keys(order.BasicPay).map((key) => (
+                      <Stack key={key} direction="row" justifyContent="center" alignItems="center" mt={1}>
+                        <Typography variant="body1"><strong>{key}: </strong></Typography>
+                        <Typography variant="body1">₹{order.BasicPay[key]}/-</Typography>
+                      </Stack>
+                    ))}
+                  </>
+                )}
+                {(order.AddOns && Object.keys(order.AddOns).length !== 0) && (
+                  <>
+                    <Typography variant="h6" textAlign={'center'} mt={2}><strong>Add Ons-</strong></Typography>
+                    {Object.keys(order.AddOns).map((key) => (
+                      <Stack key={key} direction="row" justifyContent="center" alignItems="center" mt={1}>
+                        <Typography variant="body1"><strong>{key}: </strong></Typography>
+                        <Typography variant="body1">₹{order.AddOns[key]}/-</Typography>
+                      </Stack>
+                    ))}
+                  </>
+                )}
+              </Grid>
+            </Grid>
+            <Typography variant="h6" textAlign={'center'} mt={2}><strong>Total Price: </strong> ₹{order.TotalPrice}</Typography>
+            <Typography variant="h6" textAlign={'end'} mt={2}>{formatTime(order.createdAt)}, {formatDate(order.createdAt)}</Typography>
+          </CardContent>
+        </Card>
+      </Grid>
+    ))}
+  </Grid>
+</Grid>
+
+
+        </Stack>
         )}
       </MuiContainer>
     )

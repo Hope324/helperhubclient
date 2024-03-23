@@ -23,8 +23,8 @@ import ServicesDescription from './Pages/Services/ServicesDescription'
 import ServiceSelection from './Pages/PricingMap/Serviceselection';
 import DetailsRegardingBooking from './Pages/PricingMap/DetailsRegardingBooking'
 import Admin from './Admin/Admin'
-import SummaryPage from './Pages/SummaryPage';
-
+import SummaryPage from './Pages/SummaryPage'
+import WebFont from 'webfontloader'
 import Sidebar from './Admin/Sidebar'
 import ServiceAdmin from './Admin/ServicesAdmin'
 import ServiceGrid from './Admin/ServiceGrid'
@@ -55,9 +55,13 @@ function App() {
   const {setUser,setIsAuthenticated,setLoading,isAuthenticated,user,setUserRole}=useContext(Context)
   useEffect(()=>{
     setLoading(true);
+    WebFont.load({
+      google: {
+        families: ["Poppins","Roboto", "Droid Sans", "Chilanka"]
+      }
+    });
     axios.get('https://helperhubserver.onrender.com/api/v1/userDetails',{withCredentials:true}).then(res=>{
       setUser(res.data.user);
-      console.log(res.data.user)
       setIsAuthenticated(true);
       if(user.role === "admin"){
         setUserRole("ADMIN");

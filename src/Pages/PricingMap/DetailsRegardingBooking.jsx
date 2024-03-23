@@ -75,16 +75,16 @@ const DetailsRegardingBooking = () => {
 
     return (
       <div key={section.title}>
-        <Typography variant="h6" gutterBottom fontWeight="bold">
+        <Typography variant="h6" gutterBottom fontWeight="bold" fontFamily='Roboto'>
           {section?.title}
         </Typography>
         {section?.subsections.map((subsection, subIndex) => (
           <div key={subIndex}>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom fontFamily='Roboto'>
               {subsection?.heading}
             </Typography>
             {subsection?.subHeading && (
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" color="textSecondary" fontFamily='Roboto'>
                 {subsection?.subHeading}
               </Typography>
             )}
@@ -128,7 +128,7 @@ const DetailsRegardingBooking = () => {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: '20px',minHeight:'64.7vh'}}>
       {getExtraDetails && renderData(getExtraDetails)}
     </div>
   );

@@ -61,28 +61,28 @@ const AdminDashboard = () => {
         <Grid item xs={12} md={10}>
           <div>
             <Container>
-              <Typography variant="h3" style={{ marginTop: '20px' }} sx={{ fontWeight: 'bold' }}>All Users</Typography>
+              <Typography variant="h3" style={{ marginTop: '20px' }} sx={{ fontWeight: 'bold'}}>All Users</Typography>
               <TableContainer>
                 <Table>
                   <TableHead>
                     <TableRow>
                       <TableCell>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22 }}>Name</Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22,fontFamily:"Roboto" }}>Name</Typography>
                       </TableCell>
                       <TableCell>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22 }}>Email</Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22,fontFamily:"Roboto" }}>Email</Typography>
                       </TableCell>
                       <TableCell>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22 }}>Role</Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22,fontFamily:"Roboto" }}>Role</Typography>
                       </TableCell>
                       <TableCell>
-                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22 }}>Actions</Typography>
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 22,fontFamily:"Roboto" }}>Actions</Typography>
                       </TableCell>
                       
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {users.map((user) => (
+                    {users && users.map((user) => (
                       <TableRow
                         key={user._id}
                         sx={{
@@ -98,17 +98,17 @@ const AdminDashboard = () => {
                       >
                         <TableCell>
                           <Link to={`/admin/user-details/user/${user._id}`}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16 }}>{user.username}</Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16,cursor:'pointer',fontFamily:"Roboto" }}>{user.username}</Typography>
                           </Link>
                         </TableCell>
                         <TableCell>
                           <Link to={`/admin/user-details/user/${user._id}`}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16 }}>{user.email}</Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16,cursor:'pointer',fontFamily:"Roboto" }}>{user.email}</Typography>
                           </Link>
                         </TableCell>
                         <TableCell>
                           <Link to={`/admin/user-details/user/${user._id}`}>
-                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16 }}>{user.role}</Typography>
+                            <Typography variant="body1" sx={{ fontWeight: 'bold', fontSize: 16,cursor:'pointer',fontFamily:"Roboto" }}>{user.role}</Typography>
                           </Link>
                         </TableCell>
                         

@@ -1,6 +1,6 @@
 
 import { Box, Button, Container, CssBaseline, Divider, Stack, Typography } from '@mui/material';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import checkoutHandler from '../Components/Checkout';
 import axios from 'axios';
@@ -15,7 +15,8 @@ import Loader from '../Components/Loader';
 const SummaryPage = () => {
  const summary = useSelector(state => state.serviceReducer);
   const navigate = useNavigate();
-  const {isAuthenticated,loading,setLoading,orderId,setOrderId}=useContext(Context);
+  const {isAuthenticated,loading,setLoading,user}=useContext(Context);
+  const [userId,setUserId]=useState('');
   const handleCheckout = async() => {
     try {
       if (!isAuthenticated) {
@@ -24,27 +25,20 @@ const SummaryPage = () => {
         return;
       }
       setLoading(true);
-      const {data}=await axios.post("https://helperhubserver.onrender.com/api/v1/user/purchase/order",
+      const {data}=await axios.post(`https://helperhubserver.onrender.com/api/v1/user/${userId}/purchase/order`,
         {
           Title:summary.Title,
           Location:summary.Location,
           Gender:summary.Gender,
-          TotalPrice:2350,
+          TotalPrice:summary.TotalPrice,
           ServiceDescription:summary.obj,
           BasicPay:summary.basicPay,
-          AddOns:summary.addOns
+          AddOns:summary.addOns || {}
           
       }
       ,{withCredentials:true})
-      if (data && data.success) {
-        const latestOrder = data.orderArr[data.orderArr.length - 1]; 
-        if (latestOrder && latestOrder._id) {
-          setOrderId(latestOrder._id);
-          console.log("Latest OrderId after setting:", latestOrder._id);
-          toast.success(data.message);
-          checkoutHandler(summary.TotalPrice);
-        } 
-      }
+      toast.success(data.message)
+      localStorage.setItem('orderId', JSON.stringify(data.orderId));
       checkoutHandler(summary.TotalPrice);
     } catch (error) {
       console.log(error);
@@ -56,8 +50,8 @@ const SummaryPage = () => {
     
   
   useEffect(() => {
-    console.log('orderId:', orderId);
-  }, [orderId]);
+    setUserId(user._id);
+  }, [user._id]);
   if(loading) return <Loader/>
   return (
     <Container maxWidth="md" style={{ marginTop: '50px' }}>
@@ -76,7 +70,7 @@ const SummaryPage = () => {
           )))}
 
           
-          {Object.keys(summary.addOns).length!==0 && (Object.keys(summary.addOns).map((key) => (
+          {summary.addOns && Object.keys(summary.addOns).length!==0 && (Object.keys(summary.addOns).map((key) => (
             <Stack key={key} direction="row" justifyContent="center" alignItems="center" mt={2}>
               <Typography variant="body1" fontWeight="bold" mr={1}>{key}:</Typography>
               <Typography variant="body1">₹{summary.addOns[key]}/-</Typography>

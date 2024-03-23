@@ -8,7 +8,8 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  Container
+  Container,
+  Divider
 } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import axios from 'axios';
@@ -59,24 +60,12 @@ const fetchFAQs=async()=>{
   return (
     <>
     <Slider/>
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative'}}>
       <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-        
-
-        {/* <Box
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            textAlign: 'left',
-            color: 'white',
-            maxWidth: '300px',
-          }}
-        > */}
-          <Typography variant="h2" style={{ color: 'black', fontWeight: 'bold',textAlign:'center' }}>
+          <Typography variant="h2" style={{ color: 'black', fontWeight: 'bold',textAlign:'center',fontFamily:'Poppins' }}>
             "Bringing comfort home"
           </Typography>
-          <Typography style={{ color: 'black', fontWeight: 'bold', whiteSpace: 'nowrap',textAlign:'center' }}>
+          <Typography style={{fontFamily:'Poppins', color: 'black', fontWeight: 'bold', whiteSpace: 'nowrap',textAlign:'center' }}>
             Your trusted partner for seamless service
           </Typography>
         
@@ -88,10 +77,10 @@ const fetchFAQs=async()=>{
           marginTop: '20px',
         }}
       >
-        <Typography variant="h4" style={{ color: 'black', marginBottom: '1%', fontWeight: 'bold' }}>
+        <Typography variant="h4" style={{fontFamily:'Poppins', color: 'black', marginBottom: '1%', fontWeight: 'bold' }}>
           Our Featured Services
         </Typography>
-        <Typography variant="h6" style={{ color: 'black', marginBottom: '1%', fontWeight: 'bold' }}>
+        <Typography variant="h6" style={{fontFamily:'Poppins', color: 'black', marginBottom: '1%', fontWeight: 'bold' }}>
         Hire professionals,Experienced specifically for your needs
         </Typography>
         <Box
@@ -103,7 +92,7 @@ const fetchFAQs=async()=>{
           }}
         >
           {fetchTitles && fetchTitles.length !==0 && fetchTitles.map(service => (
-            <Card key={service.id} style={{ width: '200px' }}>
+            <Card key={service._id} style={{ width: '200px' }}>
               <CardMedia
                 component="img"
                 height="140"
@@ -120,8 +109,8 @@ const fetchFAQs=async()=>{
           ))}
         </Box>
 
-
-  <Typography variant="h4" style={{ color: 'black', marginBottom: '1%', fontWeight: 'bold', marginTop: '20px' }}>
+ <Divider  width='80%' sx={{margin:'5rem auto'}} />
+  <Typography variant="h4" style={{fontFamily:'Poppins', color: 'black', marginBottom: '1%', fontWeight: 'bold', marginTop: '20px' }}>
   Why Choose Us
 </Typography>
 <Box
@@ -144,16 +133,16 @@ const fetchFAQs=async()=>{
       />
       <CardContent>
         <Box style={{ textAlign: 'center', border: 'none' }}></Box>
-        <Typography variant="h6" component="div" style={{ color: 'black', fontWeight: 'bold' }}>
+        <Typography variant="h6" component="div" style={{fontFamily:'Poppins', color: 'black', fontWeight: 'bold' }}>
           {item.title}
         </Typography>
-        <Typography style={{ color: 'black' }}>{item.description}</Typography>
+        <Typography style={{fontFamily:'Poppins', color: 'black' }}>{item.description}</Typography>
       </CardContent>
     </Card>
   ))}
 </Box>
 </Box>
-
+<Divider  width='80%' sx={{margin:'5rem auto'}} />
 <Container>
       <Box
         style={{
@@ -182,11 +171,11 @@ const fetchFAQs=async()=>{
                 aria-controls={`faq-content-${faq.id}`}
                 id={`faq-header-${faq.id}`}
               >
-                <Typography variant="h6" style={{ color: 'black', fontWeight: 'bold' }}>
+                <Typography variant="h6" style={{fontFamily:'Roboto', color: 'black', fontWeight: 'bold' }}>
                   {faq.question}
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails style={{textAlign:'justify'}}>
+              <AccordionDetails style={{fontFamily:'Roboto',textAlign:'justify'}}>
                 <Typography style={{ color: 'black' }}>{faq.answer}</Typography>
               </AccordionDetails>
             </Accordion>

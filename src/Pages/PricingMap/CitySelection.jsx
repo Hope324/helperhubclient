@@ -43,10 +43,10 @@ const CitySelection = () => {
   if(loading) return <Loader/>
   return (
     <Box margin={2}>
-      <Typography variant="h4" align="center" fontWeight="bold" margin={2}>
+      <Typography variant="h4" align="center" fontWeight="bold" margin={2} fontFamily={'Roboto'}>
         Select Your City
       </Typography>
-      <Typography variant="h5" align="center" margin={2}>
+      <Typography variant="h5" align="center" margin={2} fontFamily={'Roboto'}>
         I'm looking for a Helper in your city.
       </Typography>
       <Grid container spacing={2}>
@@ -69,12 +69,12 @@ const CitySelection = () => {
                 alt={`${city.label} Icon`}
                 style={{ width: '20vw', height:'30vh', marginBottom: '10px', borderRadius: '2rem' }}
               />
-              <Typography variant="h6" fontWeight={'900'}>{city.label}</Typography>
+              <Typography variant="h6" fontWeight={'900'} fontFamily={'Roboto'}>{city.label}</Typography>
             </Paper>
           </Grid>
         ))}
       </Grid>
-      <Typography variant="h5" align="center" margin={2}>
+      <Typography variant="h5" align="center" margin={2} fontFamily={'Poppins'}>
         Select the location where you'd like to book a Helper
       </Typography>
       <Box mt={4} textAlign="center">

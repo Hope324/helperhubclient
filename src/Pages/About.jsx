@@ -33,9 +33,9 @@ function About() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box display="flex" flexDirection="column" justifyContent="center" height="100%">
-            <Typography variant="h4" style={{ fontWeight: 'bold', textAlign: 'center' }}>Welcome to HelperHub</Typography>
-            <Typography variant="h6" style={{ textAlign: 'center' }}>A team of go-getters to give you a smooth experience</Typography>
-            <Typography variant="body1" style={{ marginTop: '8px', textAlign: 'center' }}>
+            <Typography variant="h4" style={{ fontWeight: 'bold', textAlign: 'center', fontFamily:'Poppins'}}>Welcome to HelperHub</Typography>
+            <Typography variant="h6" style={{ textAlign: 'center',fontFamily:'Poppins' }}>A team of go-getters to give you a smooth experience</Typography>
+            <Typography variant="body1" style={{ marginTop: '8px', textAlign: 'center',fontFamily:'Poppins' }}>
               HelperHub is dedicated to providing top-notch services to make your life easier. Our team consists of skilled professionals who are committed to delivering a seamless experience for all your needs. Whether it's assistance at home, medical support, or any other service, we've got you covered.
             </Typography>
           </Box>
@@ -46,7 +46,7 @@ function About() {
         {
           showMembers && showMembers.length !==0 && 
           showMembers.map((member)=>(
-          <Grid item xs={12} md={4}>
+          <Grid key={member.id} item xs={12} md={4}>
           <Card>
             <Avatar
               alt={`Team Member ${member.id}`}
@@ -54,9 +54,9 @@ function About() {
               style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px 8px 0 0' }}
             />
             <CardContent>
-              <Typography variant="h6">Team Member {member.id}</Typography>
-              <Typography variant="subtitle1">{member.subtitle}</Typography>
-              <Typography variant="body2">{member.body}</Typography>
+              <Typography variant="h6" fontFamily='Roboto'>Team Member {member.id}</Typography>
+              <Typography variant="subtitle1" fontFamily='Roboto'>{member.subtitle}</Typography>
+              <Typography variant="body2" fontFamily='Roboto'>{member.body}</Typography>
             </CardContent>
           </Card>
         </Grid>
